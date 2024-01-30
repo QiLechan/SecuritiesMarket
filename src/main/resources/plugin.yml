@@ -1,0 +1,11 @@
+name: SecuritiesMarket
+version: 1.0.0
+main: org.yuezhikong.plugins.SecuritiesMarket
+api-version: '1.19'
+depend:
+  - Vault
+commands:
+  sm:
+    description: Your description
+    usage: /sm
+    permission: sm.sm
