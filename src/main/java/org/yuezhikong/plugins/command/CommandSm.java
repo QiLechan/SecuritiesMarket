@@ -6,26 +6,27 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.yuezhikong.plugins.SecuritiesMarket;
+
+import static org.yuezhikong.plugins.net.Http.getTicker;
+
 
 public class CommandSm implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Economy economy = SecuritiesMarket.getEconomy();
-
-        if (args.length == 0) { // Ensure that there was specified a player
-            sender.sendMessage("You must specify the name of the player whose balance you would like to reset");
+        if (args.length == 0) {
+            sender.sendMessage("指令格式错误");
             return true;
         }
-        String playerName = args[0];
-        OfflinePlayer target = Bukkit.getOfflinePlayer(playerName);
-        if (target == null) { // Check if player has joined the server
-            sender.sendMessage("A player with the name '" + playerName + "' has never joined this server");
-            return true;
+        switch (args[0]){
+            case "inquire":
+                if (args.length > 2){
+                    sender.sendMessage("指令格式错误");
+                }
+                else {
+                    String Ticker = getTicker(args[1]);
+                    sender.sendMessage(Ticker);
+                }
         }
-
-        // Reset the player's balance to 0
-        economy.withdrawPlayer(target, economy.getBalance(target));
         return true;
     }
 }
