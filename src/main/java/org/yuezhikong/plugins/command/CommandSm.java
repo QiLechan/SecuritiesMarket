@@ -19,7 +19,7 @@ import static org.yuezhikong.plugins.sqlite.SqliteManager.Buy;
 public class CommandSm implements CommandExecutor {
     private HashMap<Player, Double> price = new HashMap<>();
     private HashMap<Player, String> ticker = new HashMap<>();
-    private HashMap<Player, String> amount = new HashMap<>();
+    private HashMap<Player, Integer> amount = new HashMap<>();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
@@ -48,10 +48,10 @@ public class CommandSm implements CommandExecutor {
                 } else {
                     String Ticker = getTicker(args[1]);
                     String[] parts = Ticker.split("=")[1].split("~");
-                    amount.put(player, args[2]);
-                    price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(amount.get(player)));
+                    amount.put(player, Integer.parseInt(args[2]));
+                    price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
                     ticker.put(player, parts[2]);
-                    sender.sendMessage("您将要购买" + parts[1] + "股票，当前市场价格为：" + parts[3] + "，购买数量为：" + amount.get(player) + "，花费金额为：" + price.get(player) + "元");
+                    sender.sendMessage("您将要购买" + parts[1] + "股票，当前市场价格为：" + parts[3] + "，购买数量为：" + amount.get(player) + "手，花费金额为：" + price.get(player)*100 + "元");
                     sender.sendMessage("确认购买输入/sm yes，取消购买输入/sm no");
                 }
                 break;
@@ -73,11 +73,17 @@ public class CommandSm implements CommandExecutor {
                             sender.sendMessage("购买失败");
                             break;
                         } else {
-                            Buy(player.getName(), player.getUniqueId().toString(), ticker.get(player), Integer.parseInt(amount.get(player)));
+                            Buy(player.getName(), player.getUniqueId().toString(), ticker.get(player), amount.get(player)*100);
+                            price.remove(player);
+                            ticker.remove(player);
+                            amount.remove(player);
                             sender.sendMessage("购买成功");
                         }
                     } else {
                         sender.sendMessage("您没有权限购买");
+                        price.remove(player);
+                        ticker.remove(player);
+                        amount.remove(player);
                         break;
                     }
                 }
@@ -90,6 +96,8 @@ public class CommandSm implements CommandExecutor {
                 }
                 Player player = (Player) sender;
                 price.remove(player);
+                amount.remove(player);
+                ticker.remove(player);
                 break;
             }
         }

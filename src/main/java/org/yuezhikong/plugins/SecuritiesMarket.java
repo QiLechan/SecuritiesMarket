@@ -33,7 +33,7 @@ public class SecuritiesMarket extends JavaPlugin {
             return;
         }
         else {
-            getLogger().severe("[证券市场]加载成功");
+            getLogger().info("[证券市场]加载成功");
         }
         this.getCommand("sm").setExecutor(new CommandSm());
     }
