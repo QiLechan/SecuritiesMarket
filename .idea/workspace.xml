@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="完成了GET请求">
+    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="完成了SQLite数据库写入操作">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/sqlite/SqliteManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,15 +50,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "E:/mcplugin/1.19.4/spigot-1.19.4.jar",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="mcserver" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/../1.19.4/spigot-1.19.4.jar" />
+      <option name="PROGRAM_PARAMETERS" value="nogui" />
+      <option name="WORKING_DIRECTORY" value="E:\mcplugin\1.19.4" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -79,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706608750541</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="股票买入系统正在制作中">
+      <created>1706625167300</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706625167300</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -97,6 +117,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="完成了命令注册" />
     <MESSAGE value="完成了GET请求" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成了GET请求" />
+    <MESSAGE value="股票买入系统正在制作中" />
+    <MESSAGE value="完成了SQLite数据库写入操作" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成了SQLite数据库写入操作" />
   </component>
 </project>

@@ -13,10 +13,13 @@ import org.yuezhikong.plugins.SecuritiesMarket;
 import java.util.HashMap;
 
 import static org.yuezhikong.plugins.net.Http.getTicker;
+import static org.yuezhikong.plugins.sqlite.SqliteManager.Buy;
 
 
 public class CommandSm implements CommandExecutor {
     private HashMap<Player, Double> price = new HashMap<>();
+    private HashMap<Player, String> ticker = new HashMap<>();
+    private HashMap<Player, String> amount = new HashMap<>();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
@@ -45,9 +48,10 @@ public class CommandSm implements CommandExecutor {
                 } else {
                     String Ticker = getTicker(args[1]);
                     String[] parts = Ticker.split("=")[1].split("~");
-                    String amount = args[2];
-                    price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(amount));
-                    sender.sendMessage("您将要购买" + parts[1] + "股票，当前市场价格为：" + parts[3] + "，购买数量为：" + amount + "，花费金额为：" + price.get(player) + "元");
+                    amount.put(player, args[2]);
+                    price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(amount.get(player)));
+                    ticker.put(player, parts[2]);
+                    sender.sendMessage("您将要购买" + parts[1] + "股票，当前市场价格为：" + parts[3] + "，购买数量为：" + amount.get(player) + "，花费金额为：" + price.get(player) + "元");
                     sender.sendMessage("确认购买输入/sm yes，取消购买输入/sm no");
                 }
                 break;
@@ -68,7 +72,9 @@ public class CommandSm implements CommandExecutor {
                         if (response.type != EconomyResponse.ResponseType.SUCCESS) {
                             sender.sendMessage("购买失败");
                             break;
-                        } else {sender.sendMessage("购买成功");
+                        } else {
+                            Buy(player.getName(), player.getUniqueId().toString(), ticker.get(player), Integer.parseInt(amount.get(player)));
+                            sender.sendMessage("购买成功");
                         }
                     } else {
                         sender.sendMessage("您没有权限购买");
