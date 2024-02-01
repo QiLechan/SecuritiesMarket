@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="完善买入系统">
+    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="更改仓库配置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/net/Http.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/net/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/sqlite/SqliteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/sqlite/SqliteManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +112,21 @@
       <option name="project" value="LOCAL" />
       <updated>1706703596162</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="完善买入系统">
+      <created>1706703824491</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706703824491</updated>
+    </task>
+    <task id="LOCAL-00007" summary="更改仓库配置">
+      <created>1706703868818</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706703868818</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,7 +134,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -134,6 +159,7 @@
     <MESSAGE value="股票买入系统正在制作中" />
     <MESSAGE value="完成了SQLite数据库写入操作" />
     <MESSAGE value="完善买入系统" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善买入系统" />
+    <MESSAGE value="更改仓库配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改仓库配置" />
   </component>
 </project>

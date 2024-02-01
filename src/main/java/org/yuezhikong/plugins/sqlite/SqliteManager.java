@@ -1,6 +1,5 @@
 package org.yuezhikong.plugins.sqlite;
 
-import java.io.File;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -83,5 +82,40 @@ public class SqliteManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static int Sell(String UUID, String ticker, int amount) {
+        String select = "SELECT amount FROM ticker WHERE ticker = ? AND UUID = ?";
+        String newAmount = "UPDATE ticker SET amount = amount-?  WHERE ticker = ? AND UUID = ?";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+            PreparedStatement SelectAmount = conn.prepareStatement(select);
+            SelectAmount.setString(1, ticker);
+            SelectAmount.setString(2, UUID);
+            ResultSet rs = SelectAmount.executeQuery();
+            if (!rs.next()){
+                conn.close();
+                return 0;
+            }
+            else {
+                //更新数量
+                if (rs.getInt("amount") < amount) {
+                    conn.close();
+                    return 1;
+                }
+                else {
+                    PreparedStatement pstmt = conn.prepareStatement(newAmount);
+                    pstmt.setInt(1, amount);
+                    pstmt.setString(2, ticker);
+                    pstmt.setString(3, UUID);
+                    pstmt.executeUpdate();
+                    conn.close();
+                    return 2;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

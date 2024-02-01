@@ -1,19 +1,18 @@
 package org.yuezhikong.plugins.command;
 
-import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.yuezhikong.plugins.SecuritiesMarket;
 
 import java.util.HashMap;
 
-import static org.yuezhikong.plugins.net.Http.getTicker;
+import static org.yuezhikong.plugins.net.Request.getTicker;
 import static org.yuezhikong.plugins.sqlite.SqliteManager.Buy;
+import static org.yuezhikong.plugins.sqlite.SqliteManager.Sell;
 
 
 public class CommandSm implements CommandExecutor {
@@ -73,11 +72,16 @@ public class CommandSm implements CommandExecutor {
                             sender.sendMessage("购买失败");
                             break;
                         } else {
-                            Buy(player.getName(), player.getUniqueId().toString(), ticker.get(player), amount.get(player)*100);
-                            price.remove(player);
-                            ticker.remove(player);
-                            amount.remove(player);
-                            sender.sendMessage("购买成功");
+                            new BukkitRunnable() {
+                                @Override
+                                public void run() {
+                                    Buy(player.getName(), player.getUniqueId().toString(), ticker.get(player), amount.get(player)*100);
+                                    price.remove(player);
+                                    ticker.remove(player);
+                                    amount.remove(player);
+                                    sender.sendMessage("购买成功");
+                                }
+                            }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
                         }
                     } else {
                         sender.sendMessage("您没有权限购买");
@@ -99,6 +103,45 @@ public class CommandSm implements CommandExecutor {
                 amount.remove(player);
                 ticker.remove(player);
                 break;
+            }
+            case "sell": {
+                if (!(sender instanceof Player)){
+                    sender.sendMessage("请在游戏内输入指令");
+                    return true;
+                }
+                Player player = (Player) sender;
+                if (args.length != 3) {
+                    sender.sendMessage("指令格式错误");
+                } else {
+                    String Ticker = getTicker(args[1]);
+                    String[] parts = Ticker.split("=")[1].split("~");
+                    amount.put(player, Integer.parseInt(args[2]));
+                    price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
+                    ticker.put(player, parts[2]);
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            int response = Sell(player.getUniqueId().toString(), ticker.get(player), amount.get(player));
+                            if (response == 0) {
+                                sender.sendMessage("卖出失败，您没有这支股票");
+                            } else if (response == 1){
+                                sender.sendMessage("卖出失败，您账户内余额小于您要卖出的数量");
+                            }
+                            else if (response == 2){
+                                EconomyResponse economyResponse = SecuritiesMarket.getEconomy().depositPlayer(player, price.get(player));
+                                if (economyResponse.type != EconomyResponse.ResponseType.SUCCESS) {
+                                    sender.sendMessage("卖出失败");
+                                }
+                                else {
+                                    sender.sendMessage("您已卖出" +amount.get(player)+"股"+ parts[1] + ",获得" + price.get(player) + "元");
+                                }
+                            }
+                            price.remove(player);
+                            ticker.remove(player);
+                            amount.remove(player);
+                        }
+                    }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
+                }
             }
         }
         return true;
