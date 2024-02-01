@@ -46,6 +46,13 @@ public class SqliteManager {
             }
         }
     }
+    /**
+     * 买入股票
+     * @param name 玩家名称
+     * @param UUID 玩家UUID
+     * @param ticker 股票代码
+     * @param amount 购买数量
+     */
     public static void Buy(String name, String UUID, String ticker, int amount) {
         String sql = "INSERT INTO ticker(name,UUID,ticker,amount,time) VALUES(?,?,?,?,?)";
         String select = "SELECT amount FROM ticker WHERE ticker = ? AND UUID = ?";
@@ -83,6 +90,13 @@ public class SqliteManager {
             e.printStackTrace();
         }
     }
+    /**
+     * 出售股票
+     * @param UUID 玩家UUID
+     * @param ticker 股票代码
+     * @param amount 出售数量
+     * @return 返回出售结果，0表示股票不存在，1表示股票数量不足，2表示数据库修改成功
+     */
     public static int Sell(String UUID, String ticker, int amount) {
         String select = "SELECT amount FROM ticker WHERE ticker = ? AND UUID = ?";
         String newAmount = "UPDATE ticker SET amount = amount-?  WHERE ticker = ? AND UUID = ?";

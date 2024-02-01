@@ -29,8 +29,13 @@ public class CommandSm implements CommandExecutor {
             case "inquire": {
                 if (args.length > 2) {
                     sender.sendMessage("指令格式错误");
-                } else {
+                }
+                else {
                     String Ticker = getTicker(args[1]);
+                    if (Ticker.equals("none_match")) {
+                        sender.sendMessage("股票代码错误");
+                        break;
+                    }
                     String[] parts = Ticker.split("=")[1].split("~");
                     sender.sendMessage(parts[1] + " 股票代码：" + parts[2] + " 当前价格：" + parts[3] + " 涨跌：" + parts[4] + " 涨跌幅：" + parts[5] + "%");
                 }
@@ -46,7 +51,25 @@ public class CommandSm implements CommandExecutor {
                     sender.sendMessage("指令格式错误");
                 } else {
                     String Ticker = getTicker(args[1]);
+                    if (Ticker.equals("none_match")) {
+                        sender.sendMessage("股票代码错误");
+                        break;
+                    }
                     String[] parts = Ticker.split("=")[1].split("~");
+                    try {
+                        if (args[2].contains(".")){
+                            sender.sendMessage("购买数量必须是一个整数");
+                            break;
+                        }
+                        int amount = Integer.parseInt(args[2]);
+                        if (amount <= 0){
+                            sender.sendMessage("购买数量必须大于0");
+                            break;
+                        }
+                    } catch (NumberFormatException e){
+                        sender.sendMessage("购买数量必须是一个大于0的整数");
+                        break;
+                    }
                     amount.put(player, Integer.parseInt(args[2]));
                     price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
                     ticker.put(player, parts[2]);
@@ -114,7 +137,25 @@ public class CommandSm implements CommandExecutor {
                     sender.sendMessage("指令格式错误");
                 } else {
                     String Ticker = getTicker(args[1]);
+                    if (Ticker.equals("none_match")) {
+                        sender.sendMessage("股票代码错误");
+                        break;
+                    }
                     String[] parts = Ticker.split("=")[1].split("~");
+                    try {
+                        if (args[2].contains(".")){
+                            sender.sendMessage("卖出数量必须是一个整数");
+                            break;
+                        }
+                        int amount = Integer.parseInt(args[2]);
+                        if (amount <= 0){
+                            sender.sendMessage("卖出数量必须大于0");
+                            break;
+                        }
+                    } catch (NumberFormatException e){
+                        sender.sendMessage("卖出数量必须是一个大于0的整数");
+                        break;
+                    }
                     amount.put(player, Integer.parseInt(args[2]));
                     price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
                     ticker.put(player, parts[2]);
@@ -142,6 +183,9 @@ public class CommandSm implements CommandExecutor {
                         }
                     }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
                 }
+            }
+            default:{
+                sender.sendMessage("指令格式错误");
             }
         }
         return true;
