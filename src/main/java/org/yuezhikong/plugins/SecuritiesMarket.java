@@ -14,11 +14,12 @@ import static org.yuezhikong.plugins.sqlite.SqliteManager.createNewTable;
 public class SecuritiesMarket extends JavaPlugin {
     private static Economy econ = null;
     private static File DataFolder = null;
+    private static FileConfiguration config = null;
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
         DataFolder = this.getDataFolder();
-        FileConfiguration config = getConfig();
+        config = getConfig();
         if (config.getInt("Database") == 1){
             String Folder = DataFolder.getPath() + "/sqlite.db";
             File db = new File(Folder);
@@ -57,5 +58,8 @@ public class SecuritiesMarket extends JavaPlugin {
     }
     public static File getFolder() {
         return DataFolder;
+    }
+    public static FileConfiguration getServerconfig() {
+        return config;
     }
 }

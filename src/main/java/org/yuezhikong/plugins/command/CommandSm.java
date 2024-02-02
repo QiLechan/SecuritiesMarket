@@ -4,21 +4,25 @@ import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.yuezhikong.plugins.SecuritiesMarket;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import static org.yuezhikong.plugins.net.Request.getTicker;
 import static org.yuezhikong.plugins.sqlite.SqliteManager.Buy;
 import static org.yuezhikong.plugins.sqlite.SqliteManager.Sell;
+import static org.yuezhikong.plugins.util.TimeCheck.isWithinWorkingHours;
 
 
 public class CommandSm implements CommandExecutor {
     private HashMap<Player, Double> price = new HashMap<>();
     private HashMap<Player, String> ticker = new HashMap<>();
     private HashMap<Player, Integer> amount = new HashMap<>();
+    private FileConfiguration config = SecuritiesMarket.getServerconfig();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
@@ -49,6 +53,7 @@ public class CommandSm implements CommandExecutor {
                 Player player = (Player) sender;
                 if (args.length != 3) {
                     sender.sendMessage("指令格式错误");
+                    return true;
                 } else {
                     String Ticker = getTicker(args[1]);
                     if (Ticker.equals("none_match")) {
@@ -70,6 +75,12 @@ public class CommandSm implements CommandExecutor {
                         sender.sendMessage("购买数量必须是一个大于0的整数");
                         break;
                     }
+                    if (config.getBoolean("ClosedMarkets")) {
+                        if (!isWithinWorkingHours()){
+                            sender.sendMessage("当前不在交易时间。交易时间为周一至周五的上午9:30至11:30和下午1:00至3:00之间。");
+                            return true;
+                        }
+                    }
                     amount.put(player, Integer.parseInt(args[2]));
                     price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
                     ticker.put(player, parts[2]);
@@ -77,7 +88,7 @@ public class CommandSm implements CommandExecutor {
                     sender.sendMessage("确认购买输入/sm yes，取消购买输入/sm no");
                 }
                 break;
-                }
+            }
             case "yes":{
                 if (!(sender instanceof Player)){
                     sender.sendMessage("请在游戏内输入指令");
@@ -135,6 +146,7 @@ public class CommandSm implements CommandExecutor {
                 Player player = (Player) sender;
                 if (args.length != 3) {
                     sender.sendMessage("指令格式错误");
+                    return true;
                 } else {
                     String Ticker = getTicker(args[1]);
                     if (Ticker.equals("none_match")) {
@@ -155,6 +167,12 @@ public class CommandSm implements CommandExecutor {
                     } catch (NumberFormatException e){
                         sender.sendMessage("卖出数量必须是一个大于0的整数");
                         break;
+                    }
+                    if (config.getBoolean("ClosedMarkets")) {
+                        if (!isWithinWorkingHours()){
+                            sender.sendMessage("当前不在交易时间。交易时间为周一至周五的上午9:30至11:30和下午1:00至3:00之间。");
+                            return true;
+                        }
                     }
                     amount.put(player, Integer.parseInt(args[2]));
                     price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
@@ -183,6 +201,7 @@ public class CommandSm implements CommandExecutor {
                         }
                     }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
                 }
+                break;
             }
             default:{
                 sender.sendMessage("指令格式错误");

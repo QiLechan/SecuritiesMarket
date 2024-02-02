@@ -1,1 +1,2 @@
 Database: 1  #数据库类型,SQLite=1
+ClosedMarkets: true #是否按照现实时间休市
