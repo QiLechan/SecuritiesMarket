@@ -2,9 +2,11 @@ package org.yuezhikong.plugins;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.yuezhikong.plugins.command.CommandSm;
+import org.yuezhikong.plugins.event.PlayerJoin;
 
 import java.io.File;
 
@@ -36,10 +38,12 @@ public class SecuritiesMarket extends JavaPlugin {
         else {
             getLogger().info("[证券市场]加载成功");
         }
+        getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         this.getCommand("sm").setExecutor(new CommandSm());
     }
     @Override
     public void onDisable() {
+        PlayerJoinEvent.getHandlerList().unregister(this);
         getLogger().info("[证券市场]卸载成功");
     }
     private boolean setupEconomy() {

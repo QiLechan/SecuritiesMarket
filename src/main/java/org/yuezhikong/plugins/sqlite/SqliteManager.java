@@ -133,6 +133,11 @@ public class SqliteManager {
         }
         return -1;
     }
+    /**
+     * 检查给定的UUID是否存在于数据库中，并返回与该UUID相关联的ticker和amount的HashMap。
+     * @param UUID 要检查的UUID
+     * @return 包含ticker和amount的HashMap，如果UUID不存在则返回null
+     */
     public static HashMap<String,Integer> Check(String UUID) {
         String select = "SELECT ticker, amount FROM ticker WHERE UUID = ?";
         HashMap<String,Integer> map = new HashMap<>();
@@ -148,7 +153,9 @@ public class SqliteManager {
             do {//由于第一行已经被上方if获取，先执行while中方法，后检测是否可以继续
                 String ticker = rs.getString("ticker");
                 int amount = rs.getInt("amount");
-                map.put(ticker, amount);
+                if (amount != 0){
+                    map.put(ticker, amount);
+                }
             } while (rs.next());
             conn.close();
         } catch (SQLException e) {

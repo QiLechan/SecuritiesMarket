@@ -81,7 +81,7 @@ public class CommandSm implements CommandExecutor {
                 }
                 amount.put(player, Integer.parseInt(args[2]));
                 price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
-                ticker.put(player, parts[2]);
+                ticker.put(player, args[1]);
                 sender.sendMessage("您将要购买" + parts[1] + "股票，当前市场价格为：" + parts[3] + "，购买数量为：" + amount.get(player) + "手，花费金额为：" + price.get(player)*100 + "元");
                 sender.sendMessage("确认购买输入/sm yes，取消购买输入/sm no");
                 break;
@@ -177,7 +177,7 @@ public class CommandSm implements CommandExecutor {
                 }
                 amount.put(player, Integer.parseInt(args[2]));
                 price.put(player, Double.parseDouble(parts[3]) * Double.parseDouble(String.valueOf(amount.get(player))));
-                ticker.put(player, parts[2]);
+                ticker.put(player, args[1]);
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -214,16 +214,24 @@ public class CommandSm implements CommandExecutor {
                     sender.sendMessage("指令格式错误");
                     return false;
                 }
-                String UUID = player.getUniqueId().toString();
-                HashMap<String,Integer> response = Check(UUID);
-                if (response == null){
-                    sender.sendMessage("您没有购买任何股票");
-                    break;
-                }
-                sender.sendMessage("您已购买以下股票");
-                for (String key : response.keySet()) {
-                    sender.sendMessage("股票代码："+ key + " 数量：" + response.get(key) + "股");
-                }
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        String UUID = player.getUniqueId().toString();
+                        HashMap<String,Integer> response = Check(UUID);
+                        if (response == null){
+                            sender.sendMessage("您没有购买任何股票");
+                        }
+                        else {
+                            sender.sendMessage("您已购买以下股票");
+                            for (String key : response.keySet()) {
+                                String Ticker = getTicker(key);
+                                String[] price = Ticker.split("=")[1].split("~");
+                                sender.sendMessage("股票代码：" + key + " 数量：" + response.get(key) + "股 当前价格：" + price[3] + "元");
+                            }
+                        }
+                    }
+                }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
                 break;
             }
             default:{
