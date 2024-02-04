@@ -8,11 +8,13 @@ depend:
 commands:
   sm:
     description: 证券市场
-    usage: "用法: /sm [inquire|buy|yes|no|sell]"
-    permissions:
-      sm.*:
-        default: true
-        children:
-          sm.buy: true
+    usage: "用法: /sm [inquire|buy|yes|no|sell|check]"
+    permission: sm.*
     permission-message: 您无权使用此命令。
+permissions:
+  sm.buy:
     default: true
+  sm.*:
+    default: true
+    children:
+      sm.buy: true

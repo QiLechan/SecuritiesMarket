@@ -3,6 +3,7 @@ package org.yuezhikong.plugins.sqlite;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 import static org.bukkit.Bukkit.getLogger;
 import static org.yuezhikong.plugins.SecuritiesMarket.getFolder;
@@ -131,5 +132,28 @@ public class SqliteManager {
             e.printStackTrace();
         }
         return -1;
+    }
+    public static HashMap<String,Integer> Check(String UUID) {
+        String select = "SELECT ticker, amount FROM ticker WHERE UUID = ?";
+        HashMap<String,Integer> map = new HashMap<>();
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+            PreparedStatement uuid = conn.prepareStatement(select);
+            uuid.setString(1, UUID);
+            ResultSet rs = uuid.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            do {//由于第一行已经被上方if获取，先执行while中方法，后检测是否可以继续
+                String ticker = rs.getString("ticker");
+                int amount = rs.getInt("amount");
+                map.put(ticker, amount);
+            } while (rs.next());
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return map;
     }
 }

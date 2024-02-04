@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import static org.yuezhikong.plugins.net.Request.getTicker;
-import static org.yuezhikong.plugins.sqlite.SqliteManager.Buy;
-import static org.yuezhikong.plugins.sqlite.SqliteManager.Sell;
+import static org.yuezhikong.plugins.sqlite.SqliteManager.*;
 import static org.yuezhikong.plugins.util.TimeCheck.isWithinWorkingHours;
 
 
@@ -203,6 +202,28 @@ public class CommandSm implements CommandExecutor {
                         amount.remove(player);
                     }
                 }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
+                break;
+            }
+            case "check": {
+                if (!(sender instanceof Player)){
+                    sender.sendMessage("请在游戏内输入指令");
+                    return true;
+                }
+                Player player = (Player) sender;
+                if (args.length != 1) {
+                    sender.sendMessage("指令格式错误");
+                    return false;
+                }
+                String UUID = player.getUniqueId().toString();
+                HashMap<String,Integer> response = Check(UUID);
+                if (response == null){
+                    sender.sendMessage("您没有购买任何股票");
+                    break;
+                }
+                sender.sendMessage("您已购买以下股票");
+                for (String key : response.keySet()) {
+                    sender.sendMessage("股票代码："+ key + " 数量：" + response.get(key) + "股");
+                }
                 break;
             }
             default:{
