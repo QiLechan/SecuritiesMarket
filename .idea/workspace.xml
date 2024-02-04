@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="完善了错误处理">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/util/TimeCheck.java" afterDir="false" />
+    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="添加了休市时间，修复了一些bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,16 +49,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "E:/mcplugin/1.19.4/spigot-1.19.4.jar",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/mcplugin/1.19.4/spigot-1.19.4.jar&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="mcserver" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/../1.19.4/spigot-1.19.4.jar" />
@@ -148,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706794787889</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="添加了休市时间，修复了一些bug">
+      <created>1706880730349</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706880730349</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +191,7 @@
     <MESSAGE value="卖出系统完成" />
     <MESSAGE value="添加了许可证" />
     <MESSAGE value="完善了错误处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善了错误处理" />
+    <MESSAGE value="添加了休市时间，修复了一些bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了休市时间，修复了一些bug" />
   </component>
 </project>

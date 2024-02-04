@@ -2,10 +2,17 @@ name: SecuritiesMarket
 version: 1.0.0
 main: org.yuezhikong.plugins.SecuritiesMarket
 api-version: '1.19'
+author: QiLechan
 depend:
   - Vault
 commands:
   sm:
-    description: Your description
-    usage: /sm
-    permission: sm.sm
+    description: 证券市场
+    usage: "用法: /sm [inquire|buy|yes|no|sell]"
+    permissions:
+      sm.*:
+        default: true
+        children:
+          sm.buy: true
+    permission-message: 您无权使用此命令。
+    default: true

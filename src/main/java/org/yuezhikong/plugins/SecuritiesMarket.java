@@ -21,15 +21,15 @@ public class SecuritiesMarket extends JavaPlugin {
         DataFolder = this.getDataFolder();
         config = getConfig();
         if (config.getInt("Database") == 1){
-            String Folder = DataFolder.getPath() + "/sqlite.db";
-            File db = new File(Folder);
+            String Folder = DataFolder.getPath();
+            File db = new File(Folder, "sqlite.db");
             if (!db.exists()) {
                 connect();
                 createNewTable();
             }
         }
         if (!setupEconomy() ) {
-            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getLogger().severe(String.format("[%s] - 您只安装了Vault，没有安装经济插件。正在卸载本插件……", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -40,7 +40,7 @@ public class SecuritiesMarket extends JavaPlugin {
     }
     @Override
     public void onDisable() {
-        getLogger().info("onDisable is called!");
+        getLogger().info("[证券市场]卸载成功");
     }
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
