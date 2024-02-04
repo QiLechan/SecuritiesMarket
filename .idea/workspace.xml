@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="优化代码结构并修复了一些bug">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/event/PlayerJoin.java" afterDir="false" />
+    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="添加了查询账户内股票的指令">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/SecuritiesMarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/command/CommandSm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/event/PlayerJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/event/PlayerJoin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/sqlite/SqliteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/yuezhikong/plugins/sqlite/SqliteManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1707019320967</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="添加了查询账户内股票的指令">
+      <created>1707025557508</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1707025557508</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,6 +208,7 @@
     <MESSAGE value="完善了错误处理" />
     <MESSAGE value="添加了休市时间，修复了一些bug" />
     <MESSAGE value="优化代码结构并修复了一些bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化代码结构并修复了一些bug" />
+    <MESSAGE value="添加了查询账户内股票的指令" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了查询账户内股票的指令" />
   </component>
 </project>
