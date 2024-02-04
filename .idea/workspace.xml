@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="添加了入服股票提示" />
+    <list default="true" id="5f1151c9-b755-41dc-bca1-33826092b8b1" name="更改" comment="添加了入服股票提示">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1707050132127</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="添加了入服股票提示">
+      <created>1707050758547</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1707050758547</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -210,6 +219,7 @@
     <MESSAGE value="添加了休市时间，修复了一些bug" />
     <MESSAGE value="优化代码结构并修复了一些bug" />
     <MESSAGE value="添加了查询账户内股票的指令" />
+    <MESSAGE value="修复了已知的问题" />
     <MESSAGE value="添加了入服股票提示" />
     <option name="LAST_COMMIT_MESSAGE" value="添加了入服股票提示" />
   </component>
