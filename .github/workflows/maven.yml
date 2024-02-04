@@ -55,7 +55,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Preupload artifact
-      run: mkdir artifact && cp SecuritiesMarket/target/SecuritiesMarket*.jar artifact
+      run: mkdir artifact && cp SecuritiesMarket/target/SecuritiesMarket-1.0-SNAPSHOT.jar artifact
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1
