@@ -12,6 +12,7 @@ import org.yuezhikong.plugins.SecuritiesMarket;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import static org.bukkit.Bukkit.getPlayerExact;
 import static org.yuezhikong.plugins.net.Request.getTicker;
 import static org.yuezhikong.plugins.sqlite.SqliteManager.*;
 import static org.yuezhikong.plugins.util.TimeCheck.isWithinWorkingHours;
@@ -233,6 +234,56 @@ public class CommandSm implements CommandExecutor {
                     }
                 }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
                 break;
+            }
+            case "transfer":{
+                if (!(sender instanceof Player)){
+                    sender.sendMessage("请在游戏内输入指令");
+                    return true;
+                }
+                Player player = (Player) sender;
+                Player target = getPlayerExact(args[2]);
+                if (args.length != 4) {
+                    sender.sendMessage("指令格式错误");
+                    return false;
+                }
+                if (args[3].contains(".")){
+                    sender.sendMessage("转移数量必须是一个整数");
+                    break;
+                }
+                if (Integer.parseInt(args[3])<=0){
+                    sender.sendMessage("转移数量必须大于0");
+                    break;
+                }
+                if (target == null){
+                    sender.sendMessage("玩家不在线");
+                    return true;
+                }
+                String Ticker = getTicker(args[1]);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        int response = Sell(player.getUniqueId().toString(), args[1], Integer.parseInt(args[3]));
+                        if (response == 0) {
+                            sender.sendMessage("转移失败，您没有这支股票");
+                        }
+                        else if (response == 1){
+                            sender.sendMessage("转移失败，您账户内余额小于您要卖出的数量");
+                        }
+                        else if (response == 2){
+                            Buy(target.getName(), target.getUniqueId().toString(), args[1], Integer.parseInt(args[3]));
+                            sender.sendMessage("转移成功");
+                        }
+                    }
+                }.runTaskAsynchronously(SecuritiesMarket.getPlugin(SecuritiesMarket.class));
+            }
+            case "help" :{
+                sender.sendMessage("/sm inquire [股票代码]：查询股票代码");
+                sender.sendMessage("/sm buy [股票代码] [购买数量]：购买股票");
+                sender.sendMessage("/sm yes：确认交易");
+                sender.sendMessage("/sm no：取消交易");
+                sender.sendMessage("/sm sell [持有股票] [售出数量]：出售股票");
+                sender.sendMessage("/sm check：查询持有股票");
+                sender.sendMessage("/sm transfer [股票代码] [收款人] [数量]：转移股票");
             }
             default:{
                 sender.sendMessage("指令格式错误");
